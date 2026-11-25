@@ -1,0 +1,170 @@
+Incluir Unidade
+===============
+
+Serviço que permite inserir uma unidade em um órgão/entidade.
+As unidades são divisões administrativas que realizam as contratações e celebram os contratos. Todo órgão/entidade deverá ter cadastrado ao menos uma unidade no PNCP.
+Para a inclusão de nova unidade, a plataforma deve ter o órgão/entidade habilitado como ente autorizado.
+
+**Exemplo:**
+- Órgão: Município de Itapuranga
+- Unidade Administrativa: Fundo Municipal de Assistência Social
+Para unidades localizadas fora do território brasileiro, foi incluído o código genérico ``9097071`` para ser cadastrado no campo ``codigoIBGE``.
+Será retornado nome do município ``Exterior`` e UF ``EX``.
+
+.. Attention::
+
+   Disponível apenas no ambiente de treinamento/homologação.
+   No ambiente de produção, utilize o procedimento do item `Gestão de Órgão e Entidade. <../orgao_entidade/gestao_de_orgao_e_entidade.html>`_
+  
+.. figure:: ../../_static/img/Incluir_unidade_administrativa.jpg
+	:width: 50%
+	:align: center
+	:alt: Incluir Unidade Administrativa
+
+Detalhes da Requisição
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Endpoint
+     - Método HTTP
+   * - /v1/orgaos/{cnpj}/unidades
+     - POST
+	 
+
+Exemplo de Payload
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: json
+  :linenos:
+
+	{ 
+		"codigoIBGE": "1000001", 
+		"codigoUnidade": "1", 
+		"nomeUnidade": "Unidade administrativa" 
+	}
+  
+
+Exemplo Requisição (cURL)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  :linenos:
+
+	curl -k -X POST \
+	  --header "Authorization: Bearer access_token" \
+	  "${BASE_URL}/v1/orgaos/10000000000003/unidades" \
+	  -H "accept: */*" \
+	  -H "Content-Type: application/json" \
+	  --data "@/home/objeto.json"
+
+Dados de entrada
+~~~~~~~~~~~~~~~~
+
+.. note::
+   Alimentar o parâmetro ``cnpj``.
+
+.. list-table::
+   :width: 100%
+   :widths: 5 25 15 15 55
+   :header-rows: 1
+   :class: quebra-linha-dois-ultima
+
+   * - Id
+     - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+
+   * - 1
+     - cnpj
+     - Texto (14)
+     - Sim
+     - CNPJ do órgão ao qual a unidade será vinculada
+   * - 2
+     - codigoIBGE
+     - Texto (7)
+     - Sim
+     - Código do município definido pelo IBGE ou utilizar o código ``9097071`` para localidade no exterior
+   * - 3
+     - codigoUnidade
+     - Texto (30)
+     - Sim
+     - Código da unidade administrativa a ser vinculada (definido pelo próprio órgão)
+   * - 4
+     - nomeUnidade
+     - Texto (100)
+     - Sim
+     - Nome da unidade administrativa
+
+Dados de retorno
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Id
+     - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+
+   * - 1
+     - location
+     - Texto (255)
+     - Sim
+     - Endereço HTTP do recurso criado
+
+Exemplo de Retorno
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  :linenos:
+
+	Retorno: 
+	access-control-allow-credentials: true 
+	access-control-allow-headers: Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin, 
+	access-control-allow-methods: GET,PUT,POST,DELETE,OPTIONS 
+	access-control-allow-origin: * 
+	cache-control: no-cache,no-store,max-age=0,must-revalidate 
+	content-length: 0 
+	date: ? 
+	expires: 0 
+	location: https://treina.pncp.gov.br/api/pncp/v1/orgaos/10000000000003/unidades/1 
+	pragma: no-cache 
+	strict-transport-security: max-age=? 
+	x-content-type-options: nosniff 
+	x-firefox-spdy: ? 
+	x-frame-options: DENY 
+	x-xss-protection: 1; mode=block
+
+Códigos de Retorno
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Código HTTP
+     - Mensagem
+     - Tipo
+   * - 200
+     - OK
+     - Sucesso
+   * - 400
+     - BadRequest
+     - Erro
+   * - 422
+     - Unprocessable Entity
+     - Erro
+   * - 500
+     - Internal Server Error
+     - Erro
+
+\

@@ -1,0 +1,108 @@
+Atualizar Órgão
+===============
+
+Serviço **destinado exclusivamente aos administradores do PNCP** que permite atualizar os dados de um órgão/entidade no repositório do PNCP que eventualmente esteja desatualizado.
+
+.. attention::
+
+   Não está disponível para plataformas privadas a partir de 18/08/2025.
+
+Detalhes da Requisição
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Endpoint
+     - Método HTTP
+   * - /v1/orgaos
+     - PUT
+
+Exemplo de Payload
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: json
+   :linenos:
+
+   {
+      "cnpj": "10000000000003"
+   }
+
+Exemplo Requisição (cURL)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+   :linenos:
+
+   curl -k -X PUT \
+     --header "Authorization: Bearer access_token" \
+     "${BASE_URL}/v1/orgaos" \
+     -H "accept: */*" \
+     -H "Content-Type: application/json" \
+     --data "@/home/objeto.json"
+
+Dados de entrada
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Id
+     - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+   * - 1
+     - cnpj
+     - Texto (14)
+     - Sim
+     - CNPJ do órgão
+
+Dados de retorno
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Id
+     - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+   * - 1
+     - location
+     - Texto (255)
+     - Sim
+     - Endereço HTTP do recurso criado
+
+Códigos de Retorno
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Código HTTP
+     - Mensagem
+     - Tipo
+   * - 200
+     - OK
+     - Sucesso
+   * - 400
+     - BadRequest
+     - Erro
+   * - 422
+     - Unprocessable Entity
+     - Erro
+   * - 500
+     - Internal Server Error
+     - Erro
+
+\

@@ -1,0 +1,240 @@
+Inserir Ata de Registro de Preço
+================================
+
+Serviço que permite inserir uma ata de Registro de Preço no PNCP referente a uma contratação.
+
+.. attention::
+
+   O sistema exige o upload de um arquivo anexo à ata de registro de preço enviada. As extensões permitidas para o arquivo anexo são listadas na seção Tabelas de domínio - Envio de arquivos pelas APIs de Documento e os tipos de documento/arquivo aceitos pelo PNCP podem ser consultados na seção Tabelas de domínio - Tipo de Documento, deste manual.
+
+Detalhes da Requisição
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: 50 15
+   :header-rows: 1
+
+   * - Endpoint
+     - Método HTTP
+   * - /v1/orgaos/{cnpj}/compras/{anoCompra}/{sequencialCompra}/atas
+     - POST
+
+Exemplo de Payload
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 7-14
+
+   {
+   	"numeroAtaRegistroPreco": "00001",
+   	"anoAta": 2021,
+   	"dataAssinatura": "2021-07-21",
+   	"dataVigenciaInicio": "021-07-21",
+   	"dataVigenciaFim": "2022-07-21",
+   	"possibilidadeAdesao": true,
+   	"partesEnvolvidas": [
+   		{
+   			"tipoParteEnvolvidaId": 1,
+   			"cnpj": "10000000000003",
+   			"codigoUnidadeCompradora": "1"
+   		}
+   	]
+   }
+
+Exemplo Requisição (cURL)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+   :linenos:
+   :emphasize-lines: 1-8
+
+
+   curl -k -X POST \
+     "${BASE_URL}/v1/orgaos/10000000000003/compras/2021/1/atas" \
+     -H "Authorization: Bearer access_token" \
+     -H "Accept: */*" \
+     -H "Titulo-Documento: nome_do_arquivo" \
+     -H "Tipo-Documento-Id: 11" \
+     --form 'ata=@/home/atametadados.json;type=application/json' \
+     --form 'documento=@ataarquivo.pdf;type=application/pdf'
+
+
+Dados de entrada
+~~~~~~~~~~~~~~~~
+
+.. note::
+   Alimentar os parâmetros ``{cnpj}``, ``{anoCompra}`` e ``{sequencialCompra}`` na URL.
+
+.. list-table::
+   :width: 100%
+   :widths: 5 25 10 15 55
+   :header-rows: 1
+   :class: quebra-linha-dois-ultima
+
+   * - Id
+     - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+
+   * - 1
+     - cnpj
+     - Texto (14)
+     - Sim
+     - Cnpj do órgão originário da contratação informado na inclusão (proprietário da contratação)
+
+   * - 2
+     - anoCompra
+     - Inteiro
+     - Sim
+     - Ano da contratação
+
+   * - 3
+     - sequencialCompra
+     - Inteiro
+     - Sim
+     - Sequencial da contratação no PNCP; Número sequencial gerado no momento que a contratação foi inserida no PNCP
+
+   * - :destaque:`4`
+     - :destaque:`Titulo-Documento`
+     - :destaque:`Texto (255)`
+     - :destaque:`Sim`
+     - :destaque:`Título do documento`
+
+   * - :destaque:`5`
+     - :destaque:`Tipo-Documento-Id`
+     - :destaque:`Inteiro`
+     - :destaque:`Sim`
+     - :destaque:`Código da tabela de domínio Tipo de documento`
+
+   * - 6
+     - numeroAtaRegistroPreco
+     - Texto (50)
+     - Sim
+     - Número da ata no sistema de origem
+
+   * - 7
+     - anoAta
+     - Inteiro
+     - Sim
+     - Ano da ata
+
+   * - 8
+     - dataAssinatura
+     - Data
+     - Sim
+     - Informar a data de assinatura da ata
+
+   * - 9
+     - dataVigenciaInicio
+     - Data
+     - Sim
+     - Informar a data de início de vigência da ata
+
+   * - 10
+     - dataVigenciaFim
+     - Data
+     - Sim
+     - Informar a data de fim de vigência da ata
+
+   * - :destaque-amarelo-claro:`11`
+     - :destaque-amarelo-claro:`possibilidadeAdesao`
+     - :destaque-amarelo-claro:`Booleano`
+     - :destaque-amarelo-claro:`Sim`
+     - :destaque-amarelo-claro:`Indicador se a Ata permite adesão de não participantes (False = Não / True = Sim)`
+
+   * - :destaque-amarelo-claro:`12`
+     - :destaque-amarelo-claro:`Lista de Partes Envolvidas`
+     - :destaque-amarelo-claro:`Lista`
+     - :destaque-amarelo-claro:`Sim`
+     - :destaque-amarelo-claro:`Lista de partes envolvidas. É permitido somente os códigos 1 e 2 ao inserir a ARP.`
+
+   * - :destaque-amarelo-claro:`12.1`
+     - :destaque-amarelo-claro:`tipoParteEnvolvidaId`
+     - :destaque-amarelo-claro:`Inteiro`
+     - :destaque-amarelo-claro:`Sim`
+     - :destaque-amarelo-claro:`Código do Tipo de Parte Envolvida. Código 1 - Gerenciadora; Código 2 - Participante; Código 3 - Não Participante`
+
+   * - :destaque-amarelo-claro:`12.2`
+     - :destaque-amarelo-claro:`cnpj`
+     - :destaque-amarelo-claro:`Texto (14)`
+     - :destaque-amarelo-claro:`Sim`
+     - :destaque-amarelo-claro:`CNPJ do órgão`
+
+   * - :destaque-amarelo-claro:`12.3`
+     - :destaque-amarelo-claro:`codigoUnidadeCompradora`
+     - :destaque-amarelo-claro:`Texto (30)`
+     - :destaque-amarelo-claro:`Sim`
+     - :destaque-amarelo-claro:`Código da Unidade Administrativa`
+
+Dados de retorno
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: 5 25 15 10 25
+   :header-rows: 1
+
+   * - Id
+     - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+   * - 1
+     - location
+     - Texto (255) 
+     - Sim
+     - Endereço http do recurso criado
+
+Exemplo de Retorno
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: http
+   :linenos:
+
+   access-control-allow-credentials: true
+   access-control-allow-headers: Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin
+   access-control-allow-methods: GET,PUT,POST,DELETE,OPTIONS
+   access-control-allow-origin: *
+   cache-control: no-cache,no-store,max-age=0,must-revalidate
+   content-length: 0
+   date: ?
+   expires: ?
+   location: https://treina.pncp.gov.br/api/pncp/v1/orgaos/10000000000003/compras/2021/1/atas/1
+   pragma: no-cache
+   strict-transport-security: max-age=?
+   x-content-type-options: nosniff
+   x-firefox-spdy: ?
+   x-frame-options: DENY
+   x-xss-protection: ?; mode=block
+
+Códigos de Retorno
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: 10 25 25
+   :header-rows: 1
+
+   * - Código HTTP
+     - Mensagem
+     - Tipo
+   * - 200
+     - Created
+     - Sucesso
+   * - 400
+     - BadRequest
+     - Erro
+   * - 401
+     - Unauthorized
+     - Erro
+   * - 422
+     - Unprocessable Entity
+     - Erro
+   * - 500
+     - Internal Server Error
+     - Erro
+
+\

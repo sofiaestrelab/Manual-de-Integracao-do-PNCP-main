@@ -1,0 +1,105 @@
+Excluir Plano de Contratações
+=============================
+
+Serviço que permite excluir um plano de contratações específico de uma unidade. Este serviço requer autenticação para ser acionado.
+
+Detalhes da Requisição
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Endpoint
+     - Método HTTP
+   * - /v1/orgaos/{cnpj}/pca/{ano}/{sequencial}
+     - DELETE
+	 
+
+Exemplo de Payload
+~~~~~~~~~~~~~~~~~~
+.. code-block:: json
+  :linenos:
+
+	{
+		"justificativa": "motivo/justificativa para a exclusão do plano"
+	}
+
+  
+Exemplo Requisição (cURL)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  :linenos:
+
+	curl -k -X DELETE \
+	  --header "Authorization: Bearer access_token" \
+	  "${BASE_URL}/v1/orgaos/10000000000003/pca/2021/1" \
+	  -H "accept: */*" \
+	  -H "Content-Type: application/json"
+
+Dados de entrada
+~~~~~~~~~~~~~~~~
+
+.. note::
+   Informar os dados necessários para identificação e exclusão do PCA no PNCP.
+
+.. list-table::
+   :width: 100%
+   :widths: 5 10 10 15 55
+   :header-rows: 1
+   :class: quebra-linha-ultima-coluna
+
+   * - Id
+     - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+   * - 1
+     - cnpj
+     - Texto (14)
+     - Sim
+     - CNPJ do órgão a que a unidade administrativa do PCA está vinculada
+   * - 2
+     - ano
+     - Inteiro
+     - Sim
+     - Ano do PCA
+   * - 3
+     - sequencial
+     - Inteiro
+     - Sim
+     - Sequencial do PCA no PNCP; número sequencial gerado no momento da inclusão
+   * - 4
+     - justificativa
+     - Texto (255)
+     - Sim
+     - Motivo/justificativa para exclusão do plano
+
+Códigos de Retorno
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+   
+   * - Código HTTP
+     - Mensagem
+     - Tipo
+   * - 200
+     - OK
+     - Sucesso
+   * - 400
+     - BadRequest
+     - Erro
+   * - 422
+     - Unprocessable Entity
+     - Erro
+   * - 500
+     - Internal Server Error
+     - Erro
+
+\
+

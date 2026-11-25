@@ -1,0 +1,117 @@
+/* Remove o limite de largura máxima do contêiner principal */
+/* .wy-nav-content-wrap {
+    max-width: none !important;
+}
+*/
+.wy-nav-content {
+    max-width: 100% !important;
+    margin: auto !important;
+}
+
+@media screen and (min-width: 768px) {
+    /* 1. Força a estrutura principal a ocupar a tela inteira sem rolar o site todo */
+    html, body, .wy-grid-for-nav {
+        height: 100vh !important;
+        overflow: hidden !important;
+    }
+
+    /* 2. Mantém o menu lateral esquerdo fixo na altura da tela, com sua própria rolagem se necessário */
+    .wy-nav-side {
+        height: 100vh !important;
+        overflow-y: auto !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+
+    /* 3. TRANSFORMA O CONTEÚDO NA ÚNICA ÁREA QUE ROLA NO SITE */
+    .wy-nav-content-wrap {
+        height: 100vh !important;
+        overflow-y: auto !important; /* Cria a barra de rolagem apenas aqui */
+        background: #fcfcfc !important; /* Mantém o fundo padrão */
+    }
+
+    /* 4. Garante que o topo de navegação mobile não apareça no desktop */
+    .wy-nav-top {
+        display: none !important;
+    }
+}
+
+kbd {
+  background-color: #fff3cd !important;
+  color: #000 !important;
+}
+
+/* destaque laranja */
+.destaque-amarelo {
+    background-color: #F9B066;
+    padding: 10px;
+    border-left: 5px solid #ffc107;
+    border-radius: 4px;
+    text-align: justify;    
+}
+
+.destaque-amarelo-claro {
+    background-color: #FBEC5D; 
+    border-radius: 4px;
+    text-align: justify;
+    padding: 2px 6px; 
+    display: inline; 
+}
+
+.destaque-azul-claro {
+    background-color: #ADD8E6;
+    border-radius: 4px;
+    text-align: justify;
+    padding: 2px 6px;
+    display: inline;
+}
+
+.linha-destaque {
+    background-color: #F9B066;
+    padding: 2px 4px;
+    border-radius: 4px;
+    display: inline-block;
+    white-space: normal;
+    text-align: justify;    
+}
+
+/*Quebra a linha das colunas 2, 4 e 5*/
+table.quebra-linha :is(td, th):nth-child(2),
+table.quebra-linha :is(td, th):nth-child(4),
+table.quebra-linha :is(td, th):nth-child(5) {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+table.quebra-linha-ultima-coluna td:last-child,
+table.quebra-linha-ultima-coluna th:last-child {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+/*Quebra a linha das colunas 2 e 3*/
+table.quebra-linha-colunas-dois-tres :is(td, th):nth-child(2),
+table.quebra-linha-colunas-dois-tres :is(td, th):nth-child(3) {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+/*Quebra a linha das colunas 2 e 4 */
+table.quebra-linha-dois-quatro :is(td, th):nth-child(2),
+table.quebra-linha-dois-quatro :is(td, th):nth-child(4) {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+/*Quebra a linha das colunas 2 e ultima */
+table.quebra-linha-dois-ultima :is(td, th):nth-child(2),
+table.quebra-linha-dois-ultima :is(td, th):last-child {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}

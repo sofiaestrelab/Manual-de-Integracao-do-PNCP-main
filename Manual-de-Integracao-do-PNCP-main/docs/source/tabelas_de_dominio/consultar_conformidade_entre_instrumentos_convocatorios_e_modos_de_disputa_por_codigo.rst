@@ -1,0 +1,148 @@
+Consultar conformidade entre Instrumentos Convocatórios e Modos de Disputa por Código 
+=====================================================================================
+
+Serviço que permite consultar a combinação de conformidade pelo código do instrumento convocatório e pelo código do modo de disputa.
+
+Detalhes da Requisição
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Endpoint
+     - Método HTTP
+   * - /v1/tipo-instrumento-convocatorio-modo-disputa/{tipoInstrumentoConvocatorioId}/{modoDisputaId} 
+     - GET
+
+Exemplo de Payload
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: json
+  :linenos:
+
+    Não se aplica
+
+Exemplo Requisição (cURL)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  :linenos:
+
+   curl -k -X GET \
+     "${BASE_URL}/v1/tipo-instrumento-convocatorio-modo-disputa/1/1" \
+     -H "accept: */*"
+
+Dados de Entrada
+~~~~~~~~~~~~~~~~
+
+.. note:: 
+
+   Alimentar os parâmetros ``{tipoInstrumentoConvocatorioId}`` e ``{modoDisputaId}`` na URL.
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+   :class: quebra-linha-ultima-coluna
+
+   * - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+   * - tipoInstrumentoConvocatorioId
+     - Inteiro
+     - Sim
+     - Código de identificação do instrumento convocatório
+   * - modoDisputaId
+     - Inteiro
+     - Sim
+     - Código de identificação do modo de disputa
+
+Dados de Retorno
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: 5 10 15 55
+   :header-rows: 1
+   :class: quebra-linha-ultima-coluna
+
+   * - Id
+     - Campo
+     - Tipo
+     - Descrição
+   * - 1
+     - tipoInstrumentoConvocatorio
+     - 
+     - Dados do Instrumento Convocatório
+   * - 1.1
+     - id
+     - Inteiro
+     - Código de identificação do instrumento convocatório
+   * - 1.2
+     - nome
+     - Texto
+     - Nome do instrumento convocatório
+   * - 1.3
+     - descricao
+     - Texto
+     - Descrição do instrumento convocatório
+   * - 1.4
+     - statusAtivo
+     - Booleano
+     - Indicador de status do instrumento convocatório. True-Ativo / False-Inativo
+   * - 2
+     - modoDisputa
+     - 
+     - Dados do Modo de Disputa
+   * - 2.1
+     - id
+     - Inteiro
+     - Código de identificação do modo de disputa
+   * - 2.2
+     - nome
+     - Texto
+     - Nome do modo de disputa
+   * - 2.3
+     - descricao
+     - Texto
+     - Descrição do modo de disputa
+   * - 2.4
+     - statusAtivo
+     - Booleano
+     - Indicador de status do modo de disputa. True-Ativo / False-Inativo
+   * - 3
+     - dataInclusao
+     - Data/Hora
+     - Data e hora da inclusão do registro
+
+Códigos de Retorno
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Código HTTP
+     - Mensagem
+     - Tipo
+   * - 200
+     - OK
+     - Sucesso
+   * - 400
+     - BadRequest
+     - Erro
+   * - 404
+     - Registro não encontrado
+     - NotFound
+   * - 422
+     - Unprocessable Entity
+     - Erro
+   * - 500
+     - Internal Server Error
+     - Erro
+
+\

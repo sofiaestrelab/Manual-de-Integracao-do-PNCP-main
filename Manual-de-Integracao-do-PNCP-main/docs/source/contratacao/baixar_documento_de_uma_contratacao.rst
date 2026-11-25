@@ -1,0 +1,122 @@
+Baixar Documento de uma Contratação 
+===================================
+
+Serviço que permite baixar um documento específico pertencente a uma contratação.
+
+Detalhes da Requisição
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Endpoint
+     - Método HTTP
+   * - /v1/orgaos/{cnpj}/compras/{ano}/{sequencial}/arquivos/{sequencialDocumento} 
+     - GET
+
+
+Exemplo Requisição (cURL)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  :linenos:
+
+	curl -k -X GET \
+	  "${BASE_URL}/v1/orgaos/10000000000003/compras/2021/1/arquivos/1" \
+	  -H "Accept: */*"
+
+Exemplo de Payload
+------------------
+
+.. code-block:: json
+  :linenos:
+
+	Não se aplica
+
+Dados de Entrada
+~~~~~~~~~~~~~~~~
+
+.. note::
+   Alimentar os parâmetros ``cnpj``, ``ano``, ``sequencial`` e ``sequencialDocumento`` na URL.
+
+.. list-table::
+   :width: 100%
+   :widths: 5 25 10 30 55
+   :header-rows: 1
+   :class: quebra-linha
+
+   * - Id
+     - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+
+   * - 1
+     - cnpj
+     - Texto (14)
+     - Sim
+     - Cnpj do órgão originário da contratação informado na inclusão (proprietário da contratação ou alienação de bens)
+
+   * - 2
+     - ano
+     - Inteiro
+     - Sim
+     - Ano da contratação
+
+   * - 3
+     - sequencial
+     - Inteiro
+     - Sim
+     - Sequencial da Contratação no PNCP; Número sequencial gerado no momento que a contratação foi inserida no PNCP;
+
+   * - 4
+     - sequencialDocumento
+     - Inteiro
+     - Sim
+     - Sequencial do documento no PNCP; Número sequencial gerado no momento que o documento foi inserido no PNCP;
+
+Dados de Retorno
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Id
+     - Campo
+     - Tipo
+     - Descrição
+
+   * - 1
+     - string
+     - String
+     - String do arquivo
+
+Códigos de Retorno
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Código HTTP
+     - Mensagem
+     - Tipo
+   * - 200
+     - OK
+     - Sucesso
+   * - 400
+     - BadRequest
+     - Erro
+   * - 422
+     - Unprocessable Entity
+     - Erro
+   * - 500
+     - Internal Server Error
+     - Erro
+
+\

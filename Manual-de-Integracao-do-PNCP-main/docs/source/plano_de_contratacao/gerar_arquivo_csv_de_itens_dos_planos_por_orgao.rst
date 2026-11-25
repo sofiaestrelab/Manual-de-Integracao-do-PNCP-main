@@ -1,0 +1,106 @@
+Gerar arquivo CSV de Itens dos Planos por Órgão
+===============================================
+
+Serviço que gera arquivo CSV contendo as informações de itens dos Planos de Contratações Anuais das Unidades associadas ao Órgão e Ano recebidos.
+
+Detalhes da Requisição
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Endpoint
+     - Método HTTP
+   * - /v1/orgaos/{cnpj}/pca/{ano}/csv
+     - GET
+
+Exemplo de Payload
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  :linenos:
+
+   Não se aplica.
+
+Exemplo Requisição (cURL)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  :linenos:
+
+   curl -k -X GET \
+     "https://treina.pncp.gov.br/api/pncp/v1/orgaos/00394460000141/pca/2022/csv" \
+     -H "accept: */*"
+
+Dados de Entrada
+~~~~~~~~~~~~~~~~
+
+.. note::
+  Alimentar os parâmetros ``{cnpj}`` e ``{ano}`` na URL.
+
+.. list-table::
+   :width: 100%
+   :widths: 5 25 10 30 55
+   :header-rows: 1
+   :class: quebra-linha
+
+   * - Id
+     - Campo
+     - Tipo
+     - Obrigatório
+     - Descrição
+   * - 1
+     - cnpj
+     - Texto (14)
+     - Sim
+     - Cnpj do órgão a que a unidade administrativa do PCA está vinculada
+   * - 2
+     - ano
+     - Inteiro
+     - Sim
+     - Ano do PCA
+
+Dados de retorno
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Id
+     - Campo
+     - Tipo
+     - Descrição
+   * - 1
+     - 
+     - Texto
+     - Arquivo texto em formato csv
+
+Códigos de Retorno
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :width: 100%
+   :widths: auto
+   :header-rows: 1
+
+   * - Código HTTP
+     - Mensagem
+     - Tipo
+   * - 200
+     - Created
+     - Sucesso
+   * - 400
+     - BadRequest
+     - Erro
+   * - 422
+     - Unprocessable Entity
+     - Erro
+   * - 500
+     - Internal Server Error
+     - Erro
+
+\
